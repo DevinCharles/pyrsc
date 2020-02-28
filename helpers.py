@@ -1,4 +1,6 @@
-def sortby(items, key, *args, **kwargs):
+from math import *
+
+def sortby(items, key, *args,**kwargs):
     """Sort body(ies), face(s), edge(s), point(s) by "key" where "key" is:
         - Volume
         - Area
@@ -120,7 +122,11 @@ def origin():
     return Pt(0,0)
     
 def sketch_on(face):
-    ViewHelper.SetSketchPlane(Selection.Create(face))
+    if isinstance(face,Plane):
+        sel = face
+    else:
+        sel = Selection.Create(face)
+    ViewHelper.SetSketchPlane(sel)
     
 def solidify():
     ViewHelper.SetViewMode(InteractionMode.Solid)
