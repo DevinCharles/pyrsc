@@ -1,4 +1,4 @@
-def sortby(items, key, *args,**kwargs):
+def sortby(items, key, *args, **kwargs):
     """Sort body(ies), face(s), edge(s), point(s) by "key" where "key" is:
         - Volume
         - Area
@@ -114,4 +114,16 @@ def isclose(a, b, tol=1e-09):
     return abs(a-b) <= tol
 
 def origin():
-	return Pt(0,0)
+    return Pt(0,0)
+
+def origin():
+    return Pt(0,0)
+    
+def sketch_on(face):
+    ViewHelper.SetSketchPlane(Selection.Create(face))
+    
+def solidify():
+    ViewHelper.SetViewMode(InteractionMode.Solid)
+    
+def closest(items, point):
+    return items[sortby(midpoint(items),'dist', point,'index')[0]];
