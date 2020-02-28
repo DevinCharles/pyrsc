@@ -85,3 +85,33 @@ def midpoint(item):
         return output[0]
     else:
         return output
+
+def visibility(name, data=None, vis='hide'):
+    if name == 'showall':
+        ViewHelper.ShowAll()
+        return
+    elif isinstance(name, str):
+        selection = Selection.Create(data[name])
+    else:
+        selection = Selection.Create(name)
+    if vis == 'hide':
+        ViewHelper.SetObjectVisibility(selection, VisibilityType.Hide, False)
+    elif vis == 'show':
+        ViewHelper.SetObjectVisibility(selection, VisibilityType.Show, False)
+    elif vis == 'hideothers':
+        ViewHelper.HideOthers(selection)
+    
+def Pt(x,y,z=None):
+    if z is None:
+        return Point2D.Create(x,y)
+    else:
+        return Point.Create(x,y,z)
+        
+def cyl2cart(r,theta):
+    return Pt(r*cos((pi/180)*theta), r*sin((pi/180)*theta))
+
+def isclose(a, b, tol=1e-09):
+    return abs(a-b) <= tol
+
+def origin():
+	return Pt(0,0)
